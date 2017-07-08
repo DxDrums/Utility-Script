@@ -1,5 +1,4 @@
-# Utility
+# Headbutt & Dig & Rock Smash Utility Script
 
-Inculdes:
-Utility Headbutt, 
-Utility Dig,
+Includes:
+Headbutt Script
