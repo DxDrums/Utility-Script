@@ -1,4 +1,3 @@
--- Not Used
 local checkHeadbutt = require "MoveActions/checkHeadbutt"
 local checkDig = require "MoveActions/checkDig"
 local checkRockSmash = require "MoveActions/checkRockSmash"

@@ -1,5 +1,5 @@
 name = "main"
-author = "AimForNuts"
+author = "DxDrums"
 description = [[Headbutt & Dig & Rock Smash Utility Script]]
 
 local pf 				= require "Pathfinder/MoveToApp" -- requesting table with methods
@@ -49,10 +49,22 @@ function onStart()
 
 	pf.enableDigPath()
 
+	counter = {
+	0, --healCounter
+	0, -- shinyCounter
+	0, -- catchCounter
+	0, -- wildCounter
+	0, -- headbuttCounter
+	0, -- digCounter
+	0, -- rockSmashCounter
+	0 -- berriesCounter
+	}
+
 	healCounter = 0
 	shinyCounter = 0
 	catchCounter = 0
 	wildCounter = 0
+
 	headbuttCounter = 0
 	digCounter = 0
 	rockSmashCounter = 0
@@ -111,11 +123,14 @@ end
 
 function onPause()
 	log("***********************************PAUSED************************************")
-	log("healCounter: "..healCounter)
-	log("shinyCounter: "..shinyCounter)
-	log("catchCounter: "..catchCounter)
-	log("wildCounter: "..wildCounter)
-
+	log("Heal Counter: "..counter[1])
+	log("Shiny Counter: "..counter[2])
+	log("Catch Counter: "..counter[3])
+	log("wild Counter: "..counter[4])
+	log("Headbutt Counter: "..counter[5])
+	log("Dig Counter: "..counter[6])
+	log("Rock Smash Counter: "..counter[7])
+	log("Berries Counter: "..counter[8])
 end
 
 function onResume()
@@ -132,24 +147,25 @@ end
 function onPathAction()
 	escapeTime = 0
 
---	moveToCell(14,118)
+--	moveToMap("Route 2 Stop")
+--	moveToCell(10,19)
 
 	if headbutt_move == false and dig_move == false and rock_smash_move == false then
 		fatal("*****  / ! \\ You don't have any action selected / ! \\ *****")
 		return
 	end
 
-	if allChecked == true then
+--	if allChecked == true then
 
-		log(headbuttPokemon)
+--		log(headbuttPokemon)
 
-	end
+--	end
 
 	if headbutt_move == true then
 
-		if palletVisited == true and headbuttCheck == true and allChecked == true and headbuttInProgress == true then
+		if palletVisited == false and headbuttCheck == true and allChecked == true and headbuttInProgress == true then
 
-		headbuttInProgress = StartHeadbuttKanto(5)
+		headbuttInProgress = StartHeadbuttKanto(headbuttPokemon, dig_move, rock_smash_move, pickBerries, counter)
 
 		end
 		
