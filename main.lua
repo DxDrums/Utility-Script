@@ -42,7 +42,8 @@ local pokemonToCatch = {
 "Gligar",
 "Bulbasaur",
 "Charmander",
-"Squirtle"
+"Squirtle",
+"Taillow"
 }
 
 function onStart()
@@ -147,6 +148,32 @@ end
 function onPathAction()
 	escapeTime = 0
 
+	if	false then
+		if getMapName() == "Mt. Moon B1F" then
+
+			local trees = getActiveHeadbuttTrees()
+
+			if not(next(trees) == nil) then
+				counter[5] = counter[5] + 1
+				log("Tree found at " .. trees[1]["x"] .. ", " .. trees[1]["y"])
+				log("Headbutting " .. counter[5] .. "tree on "..getMapName())
+		    	pushDialogAnswer(4)
+		    	return talkToNpcOnCell(trees[1]["x"], trees[1]["y"])
+			else
+				log("---"..getMapName().." Cleared... Moving to next Map---")
+				moveToMap("Mt. Moon 1F")
+			end
+		end
+	else
+				--moveToMap("Route 4") 12, 27
+				moveToCell(38,40)
+	end
+end
+
+
+function onPathAction2()
+	escapeTime = 0
+
 --	moveToMap("Route 2 Stop")
 --	moveToCell(10,19)
 
@@ -161,11 +188,21 @@ function onPathAction()
 
 --	end
 
+--	trees = getActiveHeadbuttTrees()
+--	if (next(trees) == nil) then
+--		log("No trees found")
+--	else
+--		log("X "..trees[1]["x"])
+--		log("Y "..trees[1]["y"])
+--		return
+--	end
+
+
 	if headbutt_move == true then
 
-		if palletVisited == false and headbuttCheck == true and allChecked == true and headbuttInProgress == true then
+		if palletVisited == true and headbuttCheck == true and allChecked == true and headbuttInProgress == true then
 
-		headbuttInProgress = StartHeadbuttKanto(headbuttPokemon, dig_move, rock_smash_move, pickBerries, counter)
+			headbuttInProgress = StartHeadbuttKanto(headbuttPokemon, dig_move, rock_smash_move, pickBerries)
 
 		end
 		
@@ -176,7 +213,7 @@ function onPathAction()
 	end
 	
 	-- Goes to Pallet Town to start the
-	if buyBall == true and allChecked == true then
+	if buyBall == false and allChecked == true then
 		if palletVisited == false then
 			palletVisited = goToPalletTown()
 		end
